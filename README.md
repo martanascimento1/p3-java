@@ -21,10 +21,5 @@
  1. Flight Search: Users can search for flights based on various criteria; ok
  2. Reservation Management: Users can book, cancel and modify flight reservations;
  3. Online Check-in: Users can check in online for their flights;
- 4. Seat Selection: Users can select and change their seats;
- 5. Baggage Information: Information on baggage allowances and fees; ok
- 6. Loyalty Program Management: Management and redemption of frequent flyer points;
- 7. Flight Status Updates: Real-time updates on flight status; 0k
- 8. Special Requests: Handling special requests such as meals and accessibility needs;
- 9. Multi-City Bookings: Book flights with multiple stopovers;
-10. Customer Support Interface: Assist customers with their queries and issues.
+ 4. Baggage Information: Information on baggage allowances and fees; ok
+ 5. Flight Status Updates: Real-time updates on flight status; 0k
