@@ -1,4 +1,6 @@
 package com.c7.aeroporto.dtos;
+import com.c7.aeroporto.entities.Reservation;
+
 import java.time.LocalDateTime;
 
 public class ReservationResponseDTO {
@@ -18,6 +20,10 @@ public class ReservationResponseDTO {
         this.reservationDate = reservationDate;
         this.flightId = flightId;
         this.destinationCity = destinationCity;
+    }
+
+    public ReservationResponseDTO(Reservation reservation) {
+
     }
 
     public Long getId() {
