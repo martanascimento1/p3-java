@@ -56,7 +56,7 @@ public class ReservationService {
                 reservation.getReservationDate(),
                 reservation.getFlight().getId(),
                 reservation.getFlight().getDestination().getCity()
-        );
+         );
     }
 
     public List<ReservationResponseDTO> findAll() {
