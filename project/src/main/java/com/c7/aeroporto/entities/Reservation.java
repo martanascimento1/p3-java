@@ -29,6 +29,7 @@ public class Reservation {
     }
 
     // Getters e Setters
+    private String seatNumber;
     public Long getId() {
         return id;
     }
@@ -58,10 +59,19 @@ public class Reservation {
     }
 
     public Flight getFlight() {
-        return flight;
+        return this.flight;
     }
 
     public void setFlight(Flight flight) {
         this.flight = flight;
     }
+
+    public String getSeatNumber() {
+        return seatNumber;
+    }
+
+    public void setSeatNumber(String seatNumber) {
+        this.seatNumber = seatNumber;
+    }
+
 }

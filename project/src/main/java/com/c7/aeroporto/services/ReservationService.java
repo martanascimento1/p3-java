@@ -13,13 +13,15 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+
+// O Spring já implementa o padrão singleton,  criando uma única instância de ReservationService e injeta essa instância em qualquer parte do código assinada com @Autowired
 @Service
 public class ReservationService {
 
     @Autowired
     private ReservationRepository reservationRepository;
 
-    @Autowired
+   @Autowired
     private FlightRepository flightRepository;
 
     public ReservationResponseDTO create(ReservationRequestDTO dto) {
@@ -63,6 +65,21 @@ public class ReservationService {
                 .map(ReservationResponseDTO::new)
                 .toList();
     }
+
+    public ReservationResponseDTO changeSeat(Long reservationId, String newSeatNumber) {
+        Reservation reservation = reservationRepository.findById(reservationId)
+                .orElseThrow(() -> new RuntimeException("Reserva não encontrada"));
+
+        boolean ocupado = reservationRepository.existsByFlightIdAndSeatNumber(reservation.getFlight().getId(), newSeatNumber);
+        if (ocupado) {
+            throw new RuntimeException("Assento já está ocupado.");
+        }
+
+        reservation.setSeatNumber(newSeatNumber);
+        reservationRepository.save(reservation);
+        return new ReservationResponseDTO(reservation);
+    }
+
 
 }
 
