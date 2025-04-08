@@ -1,6 +1,7 @@
 package com.c7.aeroporto.resources;
 import com.c7.aeroporto.dtos.ReservationRequestDTO;
 import com.c7.aeroporto.dtos.ReservationResponseDTO;
+import com.c7.aeroporto.dtos.SeatChangeDTO;
 import com.c7.aeroporto.entities.Reservation;
 import com.c7.aeroporto.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,15 @@ public class ReservationController {
     @GetMapping
     public ResponseEntity<List<ReservationResponseDTO>> getAllReservations() {
         List<ReservationResponseDTO> response = reservationService.findAll();
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/{id}/seat")
+    public ResponseEntity<ReservationResponseDTO> changeSeat(
+            @PathVariable Long id,
+            @RequestBody SeatChangeDTO dto
+    ) {
+        ReservationResponseDTO response = reservationService.changeSeat(id, dto.getNewSeatNumber());
         return ResponseEntity.ok(response);
     }
 

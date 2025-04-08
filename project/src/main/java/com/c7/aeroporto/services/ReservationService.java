@@ -64,6 +64,21 @@ public class ReservationService {
                 .toList();
     }
 
+    public ReservationResponseDTO changeSeat(Long reservationId, String newSeatNumber) {
+        Reservation reservation = reservationRepository.findById(reservationId)
+                .orElseThrow(() -> new RuntimeException("Reserva não encontrada"));
+
+        boolean ocupado = reservationRepository.existsByFlightIdAndSeatNumber(reservation.getFlight().getId(), newSeatNumber);
+        if (ocupado) {
+            throw new RuntimeException("Assento já está ocupado.");
+        }
+
+        reservation.setSeatNumber(newSeatNumber);
+        reservationRepository.save(reservation);
+        return new ReservationResponseDTO(reservation);
+    }
+
+
 }
 
 

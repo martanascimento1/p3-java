@@ -49,10 +49,16 @@ public class FlightController {
     }
 
     // BAGGAGE INFO
-
     @GetMapping(value = "/baggageInfo/{id}")
     public ResponseEntity<BaggageInfoDTO> baggageInfo(@PathVariable Long id){
         BaggageInfoDTO baggageInfoDTO = flightService.baggageInfo(id);
         return ResponseEntity.ok().body(baggageInfoDTO);
     }
+    // MOSTRAR ASSENTOS DISPONÍVEIS
+    @GetMapping("/{id}/available-seats")
+    public ResponseEntity<List<String>> getAvailableSeats(@PathVariable Long id) {
+        List<String> availableSeats = flightService.getAvailableSeats(id);
+        return ResponseEntity.ok(availableSeats);
+    }
+
 }
