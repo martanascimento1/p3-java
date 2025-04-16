@@ -1,9 +1,15 @@
 package com.c7.aeroporto.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "tb_reservations")  // Adicionei nome explícito para a tabela
 public class Reservation {
 
     @Id
@@ -12,66 +18,20 @@ public class Reservation {
 
     private String passengerName;
     private boolean checkedIn;
-
     private LocalDateTime reservationDate;
+    private String seatNumber;
 
     @ManyToOne
     @JoinColumn(name = "flight_id")
     private Flight flight;
 
-    public Reservation() {}
-
-    public Reservation(String passengerName, Flight flight) {
-        this.passengerName = passengerName;
-        this.flight = flight;
-        this.reservationDate = LocalDateTime.now();
-        this.checkedIn = false;
+    // Método estático para construção com lógica customizada
+    public static Reservation createNewReservation(String passengerName, Flight flight) {
+        return Reservation.builder()
+                .passengerName(passengerName)
+                .flight(flight)
+                .reservationDate(LocalDateTime.now())
+                .checkedIn(false)
+                .build();
     }
-
-    // Getters e Setters
-    private String seatNumber;
-    public Long getId() {
-        return id;
-    }
-
-    public String getPassengerName() {
-        return passengerName;
-    }
-
-    public void setPassengerName(String passengerName) {
-        this.passengerName = passengerName;
-    }
-
-    public boolean isCheckedIn() {
-        return checkedIn;
-    }
-
-    public void setCheckedIn(boolean checkedIn) {
-        this.checkedIn = checkedIn;
-    }
-
-    public LocalDateTime getReservationDate() {
-        return reservationDate;
-    }
-
-    public void setReservationDate(LocalDateTime reservationDate) {
-        this.reservationDate = reservationDate;
-    }
-
-    public Flight getFlight() {
-        return this.flight;
-    }
-
-    public void setFlight(Flight flight) {
-        this.flight = flight;
-    }
-
-    public String getSeatNumber() {
-        return seatNumber;
-    }
-
-    public void setSeatNumber(String seatNumber) {
-        this.seatNumber = seatNumber;
-    }
-
 }
